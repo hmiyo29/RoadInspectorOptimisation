@@ -137,6 +137,8 @@ tab2.markdown("In the data processing, the road network and the incident data we
               For the path finding, the 'shortest_path_length' function in NetworkX was used. \
               This function calculates the shortest path between two nodes in the graph and returns the distance of the path. \
               This function applies dijkstra algorithm to find the shortest path between two nodes.")
+tab2.caption("Concept of Dijkstra algorithm")
+tab2.image(path_image + "dijkstra.gif", use_column_width=True)
 tab2.markdown("\n")
 tab2.markdown("However, since there are externsive amount of candidate points and on average around 800 incidents per day, \
               the pair of nodes to calculate the driving distance were limited in advance. \
@@ -145,4 +147,8 @@ tab2.markdown("However, since there are externsive amount of candidate points an
               For these pairs, a value of 1E9 meters. In addition, some pairs did not have possible path available because of the imcompleteness of the road network. \
               For these pairs, a value of 2E9 meters were assigned. These large values will prevent from these pairs being chosen (= an inspector handling an incindent) \
               later in the optimisation.")
+tab2.markdown("\n")
+tab2.markdown("The figure below shows the concept of the cost-matrix.")
+tab2.caption("Cost-matrix")
+tab2.image(path_image + "cost-matrix.png", use_column_width=True)
                 
