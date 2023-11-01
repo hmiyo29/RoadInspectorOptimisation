@@ -152,3 +152,66 @@ tab2.markdown("The figure below shows the concept of the cost-matrix.")
 tab2.caption("Cost-matrix")
 tab2.image(path_image + "cost-matrix.png", use_column_width=True)
                 
+# ---------------------------------------- Optmisation model ------------------------------------------------------------------------------------
+tab2.subheader("Optmisation model")
+tab2.markdown("\n")
+tab2.markdown("So far, the candidate points for the road inspectors and the method to calculate the cost-matrix were introduced.\
+              In this section, the optimisation model to obtain the optimal locations of the road inspectors for a given incident dataset is explained.")
+tab2.markdown("\n")
+tab2.markdown("For the formulation of the model, the variables, constraints, and the objective function are defined.")
+tab2.markdown("\n")
+tab2.markdown("**Variables**")
+tab2.markdown("\n")
+tab2.markdown("The variables of the model should be defined to indicate the optimal locations of the road inspectors. \
+              For this, a binary variable is defined.")
+tab2.latex(r"x_{ij} = {0, 1} \quad \forall  i \in I, j \in J")
+tab2.markdown("\n")
+latext = r'''
+Where  
+$I$ 
+is the set of candidate points, and 
+$J$
+is the set of incidents. If the variable 
+$x_{ij}$
+is 1, it means that the road inspector located at the candidate point
+$i$
+is assigned to the incident
+$j$.
+Otherwise the variable would be 0.
+'''
+tab2.write(latext)
+tab2.markdown("\n")
+tab2.markdown("In addition, another binary variable is defined to indicate whether the candidate point is selected or not.")
+tab2.latex(r"c_{i} = {0, 1} \quad \forall  i \in I")
+tab2.markdown("\n")
+latext = r'''
+$c_{i}$ will be 1 if the candidate point $i$ is selected, and 0 otherwise.
+'''
+tab2.write(latext)
+tab2.markdown("\n")
+tab2.markdown("**Constraints**")
+tab2.markdown("\n")
+tab2.markdown("The constraints of the model should be defined to assure the rationality of the solution and have some assumptions implemented. \
+              There are three constraints defined for this model.")
+tab2.markdown("\n")
+tab2.markdown("1. Each incident should be handled by exactly one road inspector. \n 2. Road inspector has a capacity of 10 incidents to handle. \n 3. The number of road inspectors are limited.")
+tab2.markdown("\n")
+tab2.markdown("The first constraint is to assure that each incident is handled by exactly one road inspector. Of course every incident must be handled, \
+              and in reality it is possible that multiple road inspectors handle one incident together.\
+              However, for simplicity of the model, it is assumed that each incident is handled by exactly one road inspector. ")
+tab2.markdown("\n")
+tab2.caption("Concept of the first constraint")
+tab2.image(path_image + "1by1rule.png", use_column_width=True)
+tab2.markdown("\n")
+tab2.markdown("Mathematically, this constraint is defined as follows:")
+tab2.latex(r"\sum_{i \in I} x_{ij} = 1 \quad \forall j \in J")
+tab2.markdown("\n")
+tab2.markdown("The second constraint is to assure that each road inspector can handle up to 10 incidents.")
+
+              
+tab2.markdown("Mathematically, this constraint is defined as follows:")
+tab2.latex(r'''
+\sum_{j \in J} x_{ij} \leq 10 \cdot c_i \quad \forall i \in I
+''')
+
+
