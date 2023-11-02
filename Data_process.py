@@ -207,11 +207,51 @@ tab2.markdown("Mathematically, this constraint is defined as follows:")
 tab2.latex(r"\sum_{i \in I} x_{ij} = 1 \quad \forall j \in J")
 tab2.markdown("\n")
 tab2.markdown("The second constraint is to assure that each road inspector can handle up to 10 incidents.")
-
+tab2.markdown("\n")
+tab2.caption("Concept of the second constraint")
+tab2.image(path_image + "capacity.png", use_column_width=True)
               
 tab2.markdown("Mathematically, this constraint is defined as follows:")
 tab2.latex(r'''
 \sum_{j \in J} x_{ij} \leq 10 \cdot c_i \quad \forall i \in I
 ''')
-
-
+tab2.markdown("\n")
+tab2.markdown("The third constraint is to limit the number of road inspectors. \
+              The number of inspectors on the network are limited. \
+              This constraint is defined as follows:")
+tab2.latex(r'''
+\sum_{i \in I} c_i \leq N
+''')
+tab2.markdown("\n")
+latext = r'''
+Where
+$N$
+is the maximum number of road inspectors.
+'''
+tab2.write(latext)
+tab2.markdown("The number of maximum road inspectors are one of the parameters that can be flexible.\
+              The impact of this parameter will be discussed later.")
+tab2.markdown("\n")
+tab2.markdown("**Objective function**")
+tab2.markdown("\n")
+tab2.markdown("The objective function of the model should be defined to indicate the optimality of the solution. \
+              For this model, the objective function is defined as minimising the total travel distance. \
+              Minimising the total travel distance will result in minimising the average travel distance of the road inspectors, \
+              and thus the average response time of the road inspectors will be minimised as well. \
+              This is based on the assumption that the road inspectors are able to travel on a constant speed.")
+tab2.markdown("\n")
+tab2.markdown("Mathematically, the objective function is defined as follows:")
+tab2.latex(r'''
+\min \sum_{i \in I} \sum_{j \in J} x_{ij} \cdot d_{ij}
+''')
+tab2.markdown("\n")
+latext = r'''
+Where
+$d_{ij}$
+is the driving distance between the candidate point $i$ and the incident $j$.
+'''
+tab2.write(latext)
+tab2.markdown("\n")
+tab2.markdown("The mathematical formulation of the model were implemented in Python using Gurobi package. \
+              Gurobi package is a package that specialises in solving optimisation problems. \
+              It is known as one of the most powerful and fastest optimisation solver in Python.")
