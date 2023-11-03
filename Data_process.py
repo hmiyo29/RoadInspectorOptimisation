@@ -6,7 +6,7 @@ path_image = ""
 
 st.title("Methodology")
 
-tab1, tab2 = st.tabs(["Data processing", "Model"])
+tab1, tab2, tab3 = st.tabs(["Data processing", "Model", "Sensitivity Analysis"])
 
 
 # ---------------------------------------------------------------------- TAB 1 ------------------------------------------------------------------------
@@ -160,14 +160,15 @@ tab2.markdown("So far, the candidate points for the road inspectors and the meth
 tab2.markdown("\n")
 tab2.markdown("For the formulation of the model, the variables, constraints, and the objective function are defined.")
 tab2.markdown("\n")
-tab2.markdown("**Variables**")
+tab2.markdown('''<p style="font-size: 18px;">\
+                <b> Variables </b> </p>''', unsafe_allow_html=True)
 tab2.markdown("\n")
 tab2.markdown("The variables of the model should be defined to indicate the optimal locations of the road inspectors. \
               For this, a binary variable is defined.")
 tab2.latex(r"x_{ij} = {0, 1} \quad \forall  i \in I, j \in J")
 tab2.markdown("\n")
 latext = r'''
-Where  
+Where
 $I$ 
 is the set of candidate points, and 
 $J$
@@ -189,7 +190,8 @@ $c_{i}$ will be 1 if the candidate point $i$ is selected, and 0 otherwise.
 '''
 tab2.write(latext)
 tab2.markdown("\n")
-tab2.markdown("**Constraints**")
+tab2.markdown('''<p style="font-size: 18px;">\
+                <b> Constraints </b> </p>''', unsafe_allow_html=True)
 tab2.markdown("\n")
 tab2.markdown("The constraints of the model should be defined to assure the rationality of the solution and have some assumptions implemented. \
               There are three constraints defined for this model.")
@@ -232,7 +234,8 @@ tab2.write(latext)
 tab2.markdown("The number of maximum road inspectors are one of the parameters that can be flexible.\
               The impact of this parameter will be discussed later.")
 tab2.markdown("\n")
-tab2.markdown("**Objective function**")
+tab2.markdown('''<p style="font-size: 18px;">\
+                <b> Objective functions </b></p>''', unsafe_allow_html=True)
 tab2.markdown("\n")
 tab2.markdown("The objective function of the model should be defined to indicate the optimality of the solution. \
               For this model, the objective function is defined as minimising the total travel distance. \
@@ -255,3 +258,58 @@ tab2.markdown("\n")
 tab2.markdown("The mathematical formulation of the model were implemented in Python using Gurobi package. \
               Gurobi package is a package that specialises in solving optimisation problems. \
               It is known as one of the most powerful and fastest optimisation solver in Python.")
+# ---------------------------------------- Aggregation of results ------------------------------------------------------------------------------------
+tab2.subheader("Aggregation of results")
+tab2.markdown("\n")
+tab2.markdown("The optimal locations of the road inspectors were obtained for each scenario, and the results were aggregated to obtain the global optimal locations. \
+              The aggregation process is explained in this section.")
+tab2.markdown("\n")
+tab2.markdown("Our group decided to consider the frequency of the scenario occurring in the aggregation process. \
+              Each day has different number of incidents occurring. Our group believe that the scenarios with more likelihood to occur should be \
+              considered more important than the scenarios with less likelihood to occur.")
+tab2.markdown("\n")
+tab2.markdown("The figure below shows the histogram of the number of incidents per day in the incident dataset. \
+              It can be observed that the distribution of the number of incidents fits well with the normal distribution. \
+              This fitted normal distribution uses the average and standard deviation of the number of incidents per day from the incident dataset.")
+tab2.caption("Histogram of the number of incidents per day")
+tab2.image(path_image + "histogram_incidents.png", use_column_width=True)
+tab2.markdown("\n")
+tab2.write(r'''For each day, the probability of the number of incidents occurring was calculated using the fitted normal distribution.
+           Then, this probability was used as the weight of the day, and the optimal locations of inspectors of the day were assigned with the weight (score)
+            and summed up. As a result, the global optimal locations of the road inspectors will be the $N$ locations with the highest score.''')
+# ---------------------------------------------------------------------- END TAB 2 ------------------------------------------------------------------------
+# ---------------------------------------------------------------------- TAB 3 ----------------------------------------------------------------------------
+tab3.header('Sensitivity analysis')
+tab3.markdown("In this section the sensitivity analysis of the final model will be discussed. The purpose of this sensitivity analysis is to see how sensitive the results are to changes in the parameters of the model. Four different parameters have been chosen for this analysis, these are: \n\
+1. The weights used for combining the solutions from the training \n\
+As explained earlier, after the optimised locations of the inspectors for the 60 training days were in these locations needed to be combined into a final solution. This was done by assigning a weight to the solutions based on how likely that day was to occur. Here this method is compared to the results from using no weights, or in other words, with all weights set to 1. \n\
+2. The total number of inspectors in the network \n\
+In the gurobi optimisation there is no disadvantage to adding more inspectors to the network, which means that the best result will almost always be the maximum number of inspectors. Here the maximum number of inspectors that can be assigned to the network is reduced to 110 and 100 to see how well these solutions compare to the standard of 120 inspectors. \n\
+3. The minimum euclidian distance between inspectors \n\
+After combining the results from the training the 120 locations with the highest scores were picked. But these locations were often close together, so by introducing a minimum euclidian distance between inspectors the algorithm was forced to spread them out more. The default value used for this was 5000 meter, this was tested against the values of: 0, 1000, 2000, 3000, 4000, 6000, 7000 meter. \n\
+4. The minimum path distance between inspectors \n\
+Another way of spreading out the inspectors over the network was by adding a minimum path distance. Here the default value was 15000 meter which was tested against the values of: 0, 2500, 5000, 7500, 10000, 12500, 17500 meter. \n\
+It should be noted that in order to reduce calculation time the values of point 3 and 4 were paired up with each other in increasing order instead of testing them against all other values. The pairs used for the analysis were: [0, 0], [1000, 2500], [2000, 5000] etc.")
+
+tab3.subheader('Results sensitivity analysis')
+tab3.markdown('After running the analysis for all parameters described above the results were analysed by calculating the average response time on 20 different days. These results are displayed in boxplots below. There are 6 different boxplots for the 6 possible combinations from parameters 1 and 2. Paremeter 4 is displayed on the y-axis, keep in mind that these are paired up with parameter 3.')
+
+tab3.caption('120 inspectors with weights')
+tab3.image('./Boxplots_with_weight_120.png', width=500)
+tab3.markdown("\n")
+tab3.caption('120 inspectors without weights')
+tab3.image('./Boxplots_without_weight_120.png', width=500)
+tab3.markdown("\n")
+tab3.caption('110 inspectors with weights')
+tab3.image('./Boxplots_with_weight_110.png', width=500)
+tab3.markdown("\n")
+tab3.caption('110 inspectors without weights')
+tab3.image('./Boxplots_without_weight_110.png', width=500)
+tab3.markdown("\n")
+tab3.caption('100 inspectors with weights')
+tab3.image('./Boxplots_with_weight_100.png', width=500)
+tab3.markdown("\n")
+tab3.caption('100 inspectors without weights')
+tab3.image('./Boxplots_without_weight_100.png', width=500)
+tab3.markdown("\n")
+tab3.markdown('There are several conclusion which can be made from those boxplots. The first which is very obvious is that in all cases it holds true that the fewer inspectors there are in the network the slower the average response time will be. The second is that the average response times for the different ranges from a crescent shape which indicates an optimum of a minimum path distance between 7500-10000 meter and a minimum euclidian distance between 3000-4000 meter. A third interesting observation is that when the minimum distance between the inspectors is either large or small the variation in response times increases. The weights (parameter 1) do not seem to have a significant influence on the response times.')
