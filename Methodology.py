@@ -301,8 +301,10 @@ tab3.markdown("It should be noted that in order to reduce calculation time the v
 
 tab3.subheader('Results sensitivity analysis')
 tab3.markdown('After running the analysis for all parameters described above the results were analysed by calculating the average response time on 20 different days. These results are displayed in boxplots below. There are 6 different boxplots for the 6 possible combinations from parameters 1 and 2. Paremeter 4 is displayed on the y-axis, keep in mind that these are paired up with parameter 3.')
-
+tab3.markdown('There are several conclusion which can be made from those boxplots. The first which is very obvious is that in all cases it holds true that the fewer inspectors there are in the network the slower the average response time will be. The second is that the average response times for the different ranges from a crescent shape which indicates an optimum of a minimum path distance between 7500-10000 meter and a minimum euclidian distance between 3000-4000 meter. \
+              A third interesting observation is that when the minimum distance between the inspectors is either large or small the variation in response times increases. The weights (parameter 1) do not seem to have a significant influence on the response times.')
 tab3.image('./All boxplots.png', use_column_width=True)
+
 
 # tab3.caption('120 inspectors with weights')
 # tab3.image('./Boxplots_with_weight_120.png', width=500)
