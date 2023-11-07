@@ -57,17 +57,62 @@ dict_match = {100: {"2019-08-02": open("maps\matching_2019-08-02_100.html", "r",
                     "2019-09-16": open("maps\matching_2019-09-16_120.html", "r", encoding="utf-8").read(),
                     "2019-10-03": open("maps\matching_2019-10-03_120.html", "r", encoding="utf-8").read()}}
 tab1_intro._html(dict_match[N2][days], height=600, scrolling=True)
+tab1_intro.markdown("\n")
+tab1_intro.markdown("The boxplot and histrogram below show the distribution of the response times of the road inspectors \
+                    in each number of road inspectors scenario for the days used for the valudation of the optimal locations.")
+tab1_intro.markdown("\n")
+# BOX PLOT AND HISTOGRAM COME HERE
+tab1_intro.image("validation.jpg", use_column_width=True)
+tab1_intro.markdown("\n")
+tab1_intro.markdown("The distribution of the average response time of the road inspectors in each number of road inspectors scenario\
+                    shows that the response time for each day has an average of less than 18 minutes. \
+                    This means that new locations of road inspectors are likely to be able to reach the incidents on average less than 18 minutes in most days. \
+                    It can also be seen that the average response time decreases when the number of inspectors increases. \
+                    This is plausible because the road inspector will need to cover larger area when there are less road inspectors, \
+                    and needs more time to reach the incidents further away.")
 
+# CONCLUSION AND RECOMMENDATION
+tab1_intro.subheader("Conclusion")
+tab1_intro.markdown("This project was aimed to find the optimal locations of road inspectors so that the average response time to incidents are less than 18 minutes. \
+                    Our group was able to determine the optimal locations of road inspectors given the incident data in 3 scenarios, \
+                    which are 100, 110, and 120 road inspectors. In any scenario, the average response time was validated to be less than 18 minutes.")
+tab1_intro.markdown("**Check the maps above again for the final results!**")
+tab1_intro.markdown("As expected, the number of road inspectors affects the average response time to incidents. The more inspectors are available, \
+                    the less time it takes to reach the incidents. Also, there are some regional bias in the distribution of the optimal locations. \
+                    It can be seen that the Randstad area has more inspectors being located than the other areas. \
+                    This is because incidents occur in this area more frequently than other areas, and that has been taken into account in the model by\
+                    obtaining the optimal locations of each day, and aggregating the results of all days in the incident dataset.")
+
+tab1_intro.markdown("The optimal locations were determined by formulating a linear programming model that minimizes the total travel time of the road inspectors given a set of incidents. \
+                    As an input of the model, the set of candidate points of road inspectors were selected in rational way, \
+                    and the incident data was cleaned to be assigned onto the road network in the data processing step. \
+                    The mathematical model was formulated to satisfy the conditions of the problem, \
+                    and the variables were optimised to minimise the total travel distance of the road inspectors, \
+                    so that the average response time will be minimised as well. The model was solved using Gurobi in Python.")
+
+tab1_intro.markdown("Each result of the optimisation model was aggregated by applying a weight to each result (day) \
+                    based on the number of incidents in each day. By summing the weighted results, \
+                    the global optimal locations of road inspectors were obtained.\
+                    In addition, sensitivity analyses were conducterd to capture the influence of the parameters to obtain the global optimal locations. \
+                    These analyses helped to understand what role each parameter plays in the model, and gave the best parameter settings to obtain the best global solution.\
+                    After the calibration, the validation was conducted with the calibrated parameters settings and it was validated that the average response time is less than 18 minutes.")
+tab1_intro.markdown("The advantade of the approach we took is that it is simple, and it is able to update the optimal locations of road inspectors \
+                    by adding data of the incident sets and adjusting the parameters of the model based on the new dataset.")
+                    
 
 tab1_intro.subheader("Recommendations")
-tab1_intro.markdown("Even though optimal locations of road inspectors had been obtained, there are still some recommendations that can be made. \
+tab1_intro.markdown("Even though optimal locations of road inspectors had been obtained, there are still some recommendations that can be made to improve the model. \
                     The first recommendation is to consider the time domain of the incidents and the road inspectors. \
                     Because the incidents have its duration and road inspectors requires time to travel to the location of the incidents, \
                     the time domain of the incidents and the road inspectors should be considered to have a more realistic model. \
                     The second recommendation is to consider the traffic conditions when calculating the travel time of the road inspectors. \
                     In this model, the road inspectors were assumed to travel at a constant speed of 100 km/h. \
                     However, in reality the speed of the road inspectors is affected by the traffic conditions, especially when it is near an incident. \
-                    Therefore, to estimate the travel time more accurately, the traffic conditions should be considered. ")
+                    Therefore, to estimate the travel time more accurately, the traffic conditions should be considered. \
+                    Lastly, in this project, there were not any aspects to lower the number of inspectors. In general, the average response time would \
+                    keep improving if the number of inspectors increases. However, in reality there is a limitation to the number of inspectors. \
+                    This can be because of the budget, for instance. Therefore, it is important to consider the trade-off between the cost of the road inspectors \
+                    and the benefit of shortening the average response time, and decide the extent of how well the average response time should be improved.")
 
 
 tab2_intro.subheader("Project motivation")
