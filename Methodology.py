@@ -75,8 +75,15 @@ tab1.markdown("Some incident data were not reliable to apply for the project. \
                Some incidents have extremely long duration, as it lasted for the whole 3 months. \
                These incidents were removed from the data.")
 tab1.markdown("\n")
-
-
+tab1.markdown("Also, later the optimisation of the road inspectors' locations will be done for each day. \
+              For this, the incident dataset was divided into the training dataset, calibration dataset, and the validation dataset. \
+              60 days are used for the training, 20 days for the calibration, and 26 days for the validation. \
+              The calibration days are used in the sensitivity analysis as well. \
+              The figure below shows the division of the dataset corresponding to the number of incidents. \
+              Because the number of incidents will be used later for the aggregation of the results, \
+              the dataset was randomly divided so that the distribution of the number of incidents per day will be similar to the original dataset's distribution.")
+tab1.caption("Division of the incident dataset")
+tab1.image("datasets.jpg", use_column_width=True)
 # ---------------------------------------- Incident data to network ------------------------------------------------------------------------------------
 tab1.subheader("Assigning incident data to road network")
 tab1.write("Some incidents' locations were not exactly located on the highway network. \
