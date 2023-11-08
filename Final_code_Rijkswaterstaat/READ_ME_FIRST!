@@ -1,0 +1,20 @@
+Welcome,
+
+Thank you for taking the time to explore our project :-)
+
+The goal of this project is to find optimal road inspector locations that reduce the average response time to incidents. This is achieved by developing a model based on available data from the Dutch highway network. The outcome of the model also provides the answer to the research question: At which locations do road inspectors need to be placed to optimize the response time to incidents?
+
+The boundary condition is that this average response time must be shorter than at least 18 minutes. This requirement is based on the current validated model, which sets the average response time threshold at 18 minutes.
+
+By reading this guide, you will be able to navigate through the various files and directories with ease. The project consists of four main steps:
+
+- Data Preparation: In this stage, we ensure that the data is in a usable format for the optimization model.
+- Optimization Model: The second step involves building and running the optimization model for multiple days.
+- Sensitivity Analysis: After that, we determine the right settings/parameters to achieve the best results.
+- Validation: Finally, we perform a validation to assess the effectiveness of our model.
+
+Each of these steps can be found in different directories, each containing a notebook with clear explanations of how the steps are performed. Directories 2 (Optimization Model) and 3 (Sensitivity Analysis) contain multiple notebooks. In addition to these, there is a notebook named "Number Cruncher" designed to handle large datasets. While it may appear less clear due to its complexity, it is recommended to start with the other notebooks to understand the process more thoroughly.
+
+Hope you enjoy it.
+
+Thanks!!!
