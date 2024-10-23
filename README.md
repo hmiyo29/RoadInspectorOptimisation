@@ -3,4 +3,6 @@ This is the repository of the group project of Advanced Data Science for Traffic
 The "main" branch contains all the submission files and folders.  
 "Final_code_Rijkswaterstaat" folder contains all notebooks our group developed throughout the project. This folder is the main work of the project. Be aware that some notebooks are so large that the preview is not available on GitHub web. Please download them and check the contents.  
 In terms of the project backlog, the wiki of this repository was used. Different table-like logs were taken for each sprint. Be aware that you need to open in edit mode to be able to see the table well. "Project backlog.pdf" is the backup of the wiki backlog in case the display of wiki does not work well.  
-"Streamlit_demo.mp4" is the demo of the dashboard we created in case the streamlit link does not work. The streamlit link should have been submitted in BrightSpace, or a QR code is uploaded in the main branch as well. Please try those links.
+"Streamlit_demo.mp4" is the demo of the dashboard we created in case the streamlit link does not work. The streamlit link should have been submitted in BrightSpace, or a QR code is uploaded in the main branch as well. Please try those links.  
+Also try https://rws-group-2-dashboard-nqxfz9acpfepfn2banqqiv.streamlit.app/  
+The application might be on sleep, in this case, please simply wake up the app as will be suggested in the website.
